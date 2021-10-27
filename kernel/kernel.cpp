@@ -47,15 +47,15 @@ void _gspmm(csr_t* snaph, array2d_t<float> & input, array2d_t<float> & output,
         // Backward, normalize first
         for (int i = 0 ; i < row_count ; i++) {
             vid_t degree = snaph->get_degree(i);
-            input.row_normalize(i, degree);
+            input.row_normalize(i, degree+1);
         }
     }
 
     // Calculate A*input
     // Iterate over each vertex
     for (int i = 0 ; i < row_count ; i++) {
-        // Adding back its own features
-        //output.row_add(input.data_ptr + i*col_count, i);
+        // Add its own features
+        output.row_add(input.data_ptr + i*col_count, i);
 
         // Aggregate the features of its neighbors.
         for (int j = offset[i] ; j < offset[i+1] ; j++) {
@@ -67,7 +67,7 @@ void _gspmm(csr_t* snaph, array2d_t<float> & input, array2d_t<float> & output,
         // Forward, normalize the output
         for (int i = 0 ; i < row_count ; i++) {
             vid_t degree = snaph->get_degree(i);
-            output.row_normalize(i, degree);
+            output.row_normalize(i, degree+1);
         }
     }
 }
