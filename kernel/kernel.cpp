@@ -4,6 +4,8 @@
 
 #include "kernel.h"
 
+#include <omp.h>
+
 using std::cout;
 using std::endl;
 
@@ -11,13 +13,35 @@ int THD_COUNT = 1;
 
 using std::string;
 
-
-void print_features(array2d_t<float> & matrix, int64_t row_count, int64_t col_count) {
-    for (int i = 0 ; i < row_count ; i++) {
-        for (int j = 0 ; j < col_count ; j++) {
-            cout << matrix.get_item(i, j) << " ";
+void normalize(csr_t* snaph, array2d_t<float> & matrix) {
+    #pragma omp parallel
+    {
+        #pragma omp for
+        for (int i = 0 ; i < matrix.row_count ; i++) {
+            vid_t degree = snaph->get_degree(i);
+            matrix.row_normalize(i, degree+1);
         }
-        cout << endl;
+    }
+}
+
+void matrix_mul(csr_t* snaph, array2d_t<float> & input, array2d_t<float> & output) {
+    int64_t row_count = output.row_count;
+    int64_t col_count = output.col_count;
+    vid_t* offset = snaph->offset;
+    vid_t* nebrs = snaph->nebrs;
+
+    #pragma omp parallel
+    {
+        #pragma omp for
+        for (int i = 0 ; i < row_count ; i++) {
+            // Add its own features
+            output.row_add(input.data_ptr + i*col_count, i);
+
+            // Aggregate the features of its neighbors.
+            for (int j = offset[i] ; j < offset[i+1] ; j++) {
+                output.row_add(input.data_ptr + nebrs[j]*col_count, nebrs[j]);
+            }
+        }
     }
 }
 
@@ -37,38 +61,16 @@ void _gspmm(csr_t* snaph, array2d_t<float> & input, array2d_t<float> & output,
     
     //The core logic goes here. 
 
-    int64_t row_count = output.row_count;
-    int64_t col_count = output.col_count;
-
-    vid_t* offset = snaph->offset;
-    vid_t* nebrs = snaph->nebrs;
-
     if (reverse) {
         // Backward, normalize first
-        for (int i = 0 ; i < row_count ; i++) {
-            vid_t degree = snaph->get_degree(i);
-            input.row_normalize(i, degree+1);
-        }
-    }
-
-    // Calculate A*input
-    // Iterate over each vertex
-    for (int i = 0 ; i < row_count ; i++) {
-        // Add its own features
-        output.row_add(input.data_ptr + i*col_count, i);
-
-        // Aggregate the features of its neighbors.
-        for (int j = offset[i] ; j < offset[i+1] ; j++) {
-            output.row_add(input.data_ptr + nebrs[j]*col_count, nebrs[j]);
-        }
-    }
-
-    if (!reverse) {
-        // Forward, normalize the output
-        for (int i = 0 ; i < row_count ; i++) {
-            vid_t degree = snaph->get_degree(i);
-            output.row_normalize(i, degree+1);
-        }
+        normalize(snaph, input);
+        // Calculate A*input
+        matrix_mul(snaph, input, output);
+    } else {
+        // Calculate A*input
+        matrix_mul(snaph, input, output);  
+        // Normalize
+        normalize(snaph, output);
     }
 }
 

@@ -1,4 +1,4 @@
-# Install script for directory: /home/zhudi/bin/CS636_Big_Data/as4/Deep-Education/kernel
+# Install script for directory: /home/zhudi/bin/CS636_Big_Data/as5/Deep-Education/kernel
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,7 +39,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/zhudi/bin/CS636_Big_Data/as4/Deep-Education/kernel/pybind11/cmake_install.cmake")
+  include("/home/zhudi/bin/CS636_Big_Data/as5/Deep-Education/kernel/pybind11/cmake_install.cmake")
 
 endif()
 
@@ -51,5 +51,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/zhudi/bin/CS636_Big_Data/as4/Deep-Education/kernel/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/zhudi/bin/CS636_Big_Data/as5/Deep-Education/kernel/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
