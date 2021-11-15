@@ -1,4 +1,4 @@
-# CS636 Assignmnent 4 GCN
+# CS636 Assignmnent 4 GCN & Assignemnt 5 Multi-Thread GCN
 
 This repository is forked from https://github.com/the-data-lab/Deep-Education.
 
