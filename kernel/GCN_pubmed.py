@@ -66,7 +66,7 @@ if __name__ == "__main__":
         loss.backward()
         optimizer.step()
 
-        # print('Epoch %d | Train_Loss: %.4f' % (epoch, loss.item()))
+        print('Epoch %d | Train_Loss: %.4f' % (epoch, loss.item()))
 
         # check the accuracy for test data
         #logits_test = net.forward(feature)
