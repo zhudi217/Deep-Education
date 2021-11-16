@@ -15,6 +15,23 @@ python3 kernel_mt/GCN_pubmed.py
 
 The completed code is in /kernel and /kernel_mt. The files in dl_code_python are the original skeleton codes.
 
+## Compilation Guide
+To compile: <br/>
+```
+cmake .
+make
+```
+
+### Errors
+```
+The source directory
+
+    /home/zhudi/bin/CS636_Big_Data/as5/Deep-Education/kernel/pybind11
+
+  does not contain a CMakeLists.txt file.
+
+```
+
 ## Sample Output
 Single-thread GCN: <br/>
 ```
