@@ -18,11 +18,11 @@ The completed code is in /kernel and /kernel_mt. The files in dl_code_python are
 ## Compilation Guide
 To compile: <br/>
 ```
+cd kernel or cd kernel_mt
 cmake .
 make
 ```
-
-### Errors
+If you encounter the following error
 ```
 The source directory
 
@@ -31,6 +31,13 @@ The source directory
   does not contain a CMakeLists.txt file.
 
 ```
+Please do
+```
+git rm --cached pybind11
+rm -r pybind11
+git submodule add https://github.com/pybind/pybind11.git pybind11
+```
+and then compile.
 
 ## Sample Output
 Single-thread GCN: <br/>
