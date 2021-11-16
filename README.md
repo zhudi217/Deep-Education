@@ -4,7 +4,7 @@ This repository is forked from https://github.com/the-data-lab/Deep-Education.
 
 ## Usage
 
-To test single-thread GCN: <br/>
+There should be no need to compile the code. To test single-thread GCN: <br/>
 ```
 python3 kernel/GCN_pubmed.py
 ```
