@@ -1,3 +1,6 @@
 [submodule "kernel/pybind11"]
 	path = kernel/pybind11
 	url = https://github.com/pybind/pybind11.git
+[submodule "kernel_mt/pybind11"]
+	path = kernel_mt/pybind11
+	url = https://github.com/pybind/pybind11.git
