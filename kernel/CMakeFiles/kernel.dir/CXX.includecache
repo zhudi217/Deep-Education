@@ -6,11 +6,11 @@
 
 #IncludeRegexTransform: 
 
-/home/zhudi/bin/CS636_Big_Data/as4/Deep-Education/kernel/csr.h
+/home/zhudi/bin/CS636_Big_Data/as5/Deep-Education/kernel/csr.h
 stdint.h
-/home/zhudi/bin/CS636_Big_Data/as4/Deep-Education/kernel/stdint.h
+/home/zhudi/bin/CS636_Big_Data/as5/Deep-Education/kernel/stdint.h
 
-/home/zhudi/bin/CS636_Big_Data/as4/Deep-Education/kernel/kernel.cpp
+/home/zhudi/bin/CS636_Big_Data/as5/Deep-Education/kernel/kernel.cpp
 cassert
 -
 iostream
@@ -18,15 +18,17 @@ iostream
 limits
 -
 kernel.h
-/home/zhudi/bin/CS636_Big_Data/as4/Deep-Education/kernel/kernel.h
+/home/zhudi/bin/CS636_Big_Data/as5/Deep-Education/kernel/kernel.h
+omp.h
+-
 
-/home/zhudi/bin/CS636_Big_Data/as4/Deep-Education/kernel/kernel.h
+/home/zhudi/bin/CS636_Big_Data/as5/Deep-Education/kernel/kernel.h
 csr.h
-/home/zhudi/bin/CS636_Big_Data/as4/Deep-Education/kernel/csr.h
+/home/zhudi/bin/CS636_Big_Data/as5/Deep-Education/kernel/csr.h
 op.h
-/home/zhudi/bin/CS636_Big_Data/as4/Deep-Education/kernel/op.h
+/home/zhudi/bin/CS636_Big_Data/as5/Deep-Education/kernel/op.h
 
-/home/zhudi/bin/CS636_Big_Data/as4/Deep-Education/kernel/op.h
+/home/zhudi/bin/CS636_Big_Data/as5/Deep-Education/kernel/op.h
 string
 -
 cstring

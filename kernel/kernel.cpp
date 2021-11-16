@@ -14,14 +14,10 @@ int THD_COUNT = 1;
 using std::string;
 
 void normalize(csr_t* snaph, array2d_t<float> & matrix) {
-    #pragma omp parallel
-    {
-        #pragma omp for
         for (int i = 0 ; i < matrix.row_count ; i++) {
             vid_t degree = snaph->get_degree(i);
             matrix.row_normalize(i, degree+1);
         }
-    }
 }
 
 void matrix_mul(csr_t* snaph, array2d_t<float> & input, array2d_t<float> & output) {
@@ -30,9 +26,9 @@ void matrix_mul(csr_t* snaph, array2d_t<float> & input, array2d_t<float> & outpu
     vid_t* offset = snaph->offset;
     vid_t* nebrs = snaph->nebrs;
 
-    #pragma omp parallel
-    {
-        #pragma omp for
+    //#pragma omp parallel
+    //{
+        //#pragma omp for
         for (int i = 0 ; i < row_count ; i++) {
             // Add its own features
             output.row_add(input.data_ptr + i*col_count, i);
@@ -42,7 +38,7 @@ void matrix_mul(csr_t* snaph, array2d_t<float> & input, array2d_t<float> & outpu
                 output.row_add(input.data_ptr + nebrs[j]*col_count, nebrs[j]);
             }
         }
-    }
+    //}
 }
 
 
