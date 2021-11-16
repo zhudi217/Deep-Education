@@ -4,12 +4,16 @@ This repository is forked from https://github.com/the-data-lab/Deep-Education.
 
 ## Usage
 
-To test the file: <br/>
+To test single-thread GCN: <br/>
 ```
 python3 kernel/GCN_pubmed.py
 ```
+To test multi-thread GCN: <br/>
+```
+python3 kernel_mt/GCN_pubmed.py
+```
 
-The completed code is in /kernel. The files in dl_code_python are the original skeleton codes.
+The completed code is in /kernel and /kernel_mt. The files in dl_code_python are the original skeleton codes.
 
 ## Sample Output
 Single-thread GCN: <br/>
